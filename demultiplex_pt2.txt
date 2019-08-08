@@ -1,0 +1,103 @@
+PART 1 - QUALITY SCORE DISTRIBUTION PER-NUCLEOTIDE QUESTIONS
+------------------------------------------------------------------------------------------
+
+1. SEE THE ANSWERS FILE WITH TABLE IN IT THAT WAS GENERATED AND SUBMITTED ON GITHUB
+
+2B. You may want to use different cutoffs for the biological and index reads, "respectively". But, 
+	this will depend on the data you output which will reflect unique distributions for both biological
+	and index reads. So you may want to pick a different quality cutoff depending on what read you're looking at.
+
+
+
+2C. 
+
+ zcat R2.test.gz | awk 'NR%4==2' | grep "N" | wc -l
+
+
+Index from R2 (unk. read lines) = 3976613
+Index from R3 (unk. read lines) = 3328051
+
+
+
+
+
+
+
+
+PART 2 - PSEUDOCODE
+------------------------------------------------------------------------------------------
+We have four files to work with. 
+	file1 = biological fwd reads
+	file2 = index fwd 
+	file3 = index rvs
+	file4 = biological rvs reads
+
+
+For the *four-line* (FASTQ) records in each file (write an argparse statement file=f)
+
+
+Open all of the files and read them four lines at a time. Append each of the four lines to
+four arrays that you made. 
+append sequence line of sense index array (what position of the array is sequence stored in?) to 
+append also the sequence line (*antisense complement*) from the other array for index you made
+
+
+PERHAPS MAKE ARGPARSE PARAMETERS FOR THE FOLLOWING:
+
+If the index1 appended to header line matches *reverse complement* of index2,
+check through indexes.txt to confirm that indexes match index1 output the
+ records to a file: "index1_index2_R1.fq" and "index1_index2_R2.fq" files;
+  
+
+Check through indexes.txt to make sure both appear in the list though they 
+do not match in the appended header lines
+output these records to files: "unmatched<_index1_index2>.fq"
+
+check through indexes.txt to make sure an index does not appear in the appended header lines
+write these out to an "unkown<_index1_index2>.fq"
+
+if 'N' in any of indices of the appended headers output to a file "lowquality_<IndexWith'N'InIt>.fq"
+
+
+
+def rev_comp(DNAseq):
+'''Takes DNA molecule and returns the antisense complement'''
+Takes the complement of DNA (PERHAPS use a dictionary)
+returns the reverse complement of that DNA sequence
+
+
+
+def get_lines(file):
+'''Takes a records from files input''' 
+Takes the files that you're interested in ascertaining
+records from
+returns every four lines (records) from a file
+
+
+
+------------------------------------------------------------------------------------
+PART 2.... OF PART 2
+------------------------------------------------------------------------------------
+The problem is that we have multiple files that have index reads and biological reads in them
+some of these reads are mismatched (index hopped). Some of these are of low quality and do not have
+nucleotides identified during sequencing (populated with a number of 'N' characters). We need 
+to make sure that these errors are accounted for when we as bioinformaticians look to explain
+biological phenomena from the sequencing data we examine.
+
+I would output to files that, if the indices match, have and R1.fq and R2.fq suffix. I would 
+output the same files for unmatched indexes, those indices that do not match to the list of indices,
+and then finally a low quality output file. This would organize all of the data so that you can more
+selectively view your data and compare it against itself (and other datasets!) based on what 
+sort of questions you're interested in answering
+
+
+
+
+
+
+
+
+
+
+
+	
