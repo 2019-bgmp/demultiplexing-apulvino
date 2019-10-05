@@ -65,6 +65,11 @@ def rev_comp(DNAseq):
 Takes the complement of DNA (PERHAPS use a dictionary)
 returns the reverse complement of that DNA sequence
 
+FUNCTION ex. (unit test for rev_comp(DNAseq)):
+
+Input: CGTATA
+Output: GCATAT
+
 
 
 def get_lines(file):
@@ -72,6 +77,11 @@ def get_lines(file):
 Takes the files that you're interested in ascertaining
 records from
 returns every four lines (records) from a file
+
+FUNCTION ex. (unit test for get_lines(file)):
+ 
+Input: *_001.fastq.gz.png
+Output: ^[A-Z]
 
 
 
