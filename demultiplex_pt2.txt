@@ -80,8 +80,12 @@ returns every four lines (records) from a file
 
 FUNCTION ex. (unit test for get_lines(file)):
  
-Input: *_001.fastq.gz.png
-Output: ^[A-Z]
+Input: 
+@K00337:83:HJKJNBBXX:8:1101:1367:1191 2:N:0:1
+ATCGATCG
++
+#AAAFJJ<
+Output: ATCGATCG
 
 
 
