@@ -1,0 +1,23 @@
+#!/bin/env bash
+
+#SBATCH --partition=bgmp        
+#SBATCH --job-name=demultip   
+#SBATCH --output=demultip.out    
+#SBATCH --error=demultip.err        
+#SBATCH --time=0-48:00:00       
+#SBATCH --nodes=1               
+#SBATCH --ntasks-per-node=1     
+#SBATCH --account=bgmp  
+#SBATCH --cpus-per-task=1 
+
+
+conda activate bgmp_py3
+
+/usr/bin/time -v python demultiplexscript.py -f1 /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R1_001.fastq.gz -f2 /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R2_001.fastq.gz -f3 /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R3_001.fastq.gz -f4 /projects/bgmp/shared/2017_sequencing/1294_S1_L008_R4_001.fastq.gz
+#actual files
+
+
+
+
+#/usr/bin/time -v python demultiplex.py -f1 /projects/bgmp/apulvino/Bi622/DemultiplexProj/R1.test.gz -f2 /projects/bgmp/apulvino/Bi622/DemultiplexProj/R2.test.gz -f3 /projects/bgmp/apulvino/Bi622/DemultiplexProj/R3.test.gz -f4 /projects/bgmp/apulvino/Bi622/DemultiplexProj/R4.test.gz
+#test files
